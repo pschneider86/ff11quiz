@@ -33,5 +33,24 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('span');
+            snowflake.className = 'snowflake';
+            // Zufällig ❄️, 🎄 oder 🚒
+            const icons = ['❄️', '🎄', '🚒'];
+            snowflake.textContent = icons[Math.floor(Math.random() * 12) === 0 ? Math.floor(Math.random() * 3) : 0];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDelay = (Math.random() * 5) + 's';
+            snowflake.style.fontSize = (Math.random() * 1.5 + 1) + 'em';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnowflake, 400);
+    </script>
 </body>
 </html>

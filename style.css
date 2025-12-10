@@ -209,3 +209,18 @@ button:hover {
 .action-button:hover {
     background-color: #002244;
 }
+
+.snowflake {
+  color: #fff;
+  font-size: 1.5em;
+  position: fixed;
+  top: -2em;
+  z-index: 9999;
+  animation: snowflakes-fall 10s linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+@keyframes snowflakes-fall {
+  0% { transform: translateY(-2em); }
+  100% { transform: translateY(110vh); }
+}
