@@ -1,0 +1,17 @@
+Kategorie;Schwierigkeit;Frage;Antwortmöglichkeiten;Lösung
+Feuerwehr-Geschichte;100;In welchem Jahr wurde die erste Berufsfeuerwehr in Deutschland gegründet?;A: 1870; B: 1872; C: 1875;1872
+Feuerwehr-Geschichte;200;Welche Stadt beansprucht, die älteste Berufsfeuerwehr Deutschlands zu haben?;;Berlin
+Feuerwehr-Geschichte;300;Was ist der "Feuerwehr-Grundsatz" in Deutschland (Reihenfolge der Maßnahmen)?;;Retten, Löschen, Bergen, Schützen
+Feuerwehr-Geschichte;400;Wie lange dauert die Grundausbildung für einen ehrenamtlichen Feuerwehrmann in Baden-Württemberg (ungefähr in Stunden)?;;70-80 Stunden
+Ausrüstung und Technik;100;Wie nennt man den Schlauch, der zum Ansaugen von Wasser aus offenen Gewässern verwendet wird?;;Saugschlauch
+Ausrüstung und Technik;200;Was ist die Hauptfunktion eines Hohlstrahlrohres?;A: Große Wurfweite; B: Variable Durchflussmenge; C: Niedriger Druck;Variable Durchflussmenge
+Ausrüstung und Technik;300;Welchen Mindestbetriebsdruck (in bar) muss ein Pressluftatmer (PA) haben, um eingesetzt werden zu können?;;200 bar
+Ausrüstung und Technik;400;Mit welcher Einheit wird der Förderstrom einer Pumpe angegeben?;;Liter pro Minute (l/min)
+Taktik und Einsatz;100;Was bedeutet der Funk-Code "F2"?;;Kleiner Brand
+Taktik und Einsatz;200;Was versteht man unter dem Begriff "Flashover"?;;Plötzliche Durchzündung von Brandgasen
+Taktik und Einsatz;300;Wie lautet die Formel zur Berechnung des Wasserbedarfs bei einem Innenangriff (ungefähr)?;;C = Q * t (C=Kühlleistung, Q=Wärmeabgabe, t=Zeit)
+Taktik und Einsatz;400;Was ist die wichtigste Regel beim Betreten eines Brandraums unter Atemschutz?;;Immer am Boden bleiben (kriechen)
+Noch eine Kategorie;100;Was bedeutet der Funk-Code "F2"?;;Kleiner Brand
+Noch eine Kategorie;200;Was versteht man unter dem Begriff "Flashover"?;;Plötzliche Durchzündung von Brandgasen
+Noch eine Kategorie;300;Wie lautet die Formel zur Berechnung des Wasserbedarfs bei einem Innenangriff (ungefähr)?;;C = Q * t (C=Kühlleistung, Q=Wärmeabgabe, t=Zeit)
+Noch eine Kategorie;400;Was ist die wichtigste Regel beim Betreten eines Brandraums unter Atemschutz?;;Immer am Boden bleiben (kriechen)

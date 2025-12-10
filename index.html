@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feuerwehr Quiz SPA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main id="quiz-container">
+        <div id="quiz-board" class="board-grid"></div>
+
+        <div id="question-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-category"></h2>
+                <p class="points-indicator" id="modal-points"></p>
+                
+                <div class="question-text">
+                    <p id="modal-question"></p>
+                    <ul id="modal-options"></ul>
+                </div>
+
+                <div class="answer-section">
+                    <button id="show-answer-btn">Lösung anzeigen</button>
+                    
+                    <p id="modal-answer" class="hidden final-answer-text"></p>
+                </div>
+                
+                <button id="close-modal-btn" class="action-button">Zurück zur Tafel</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
