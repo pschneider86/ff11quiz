@@ -11,7 +11,7 @@
     --cat-color-1: var(--color-red);
     --cat-color-2: var(--color-dark-blue);
     --cat-color-3: var(--color-orange);
-    --cat-color-4: #6d6d6d; /* Eine neue Graustufe für die 4. Kategorie */
+    --cat-color-4: #00b176;
     --cat-color-default: gray;
     
     /* Board-Layout */

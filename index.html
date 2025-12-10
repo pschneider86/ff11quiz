@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feuerwehr Quiz SPA</title>
+    <title>Das große FF Birkach Weihnachtsfeierquiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,7 +38,7 @@
             const snowflake = document.createElement('span');
             snowflake.className = 'snowflake';
             // Zufällig ❄️, 🎄 oder 🚒
-            const icons = ['❄️', '🎄', '🚒'];
+            const icons = ['❄️', '🎄', '🚒', '🎁', '🍺'];
             snowflake.textContent = icons[Math.floor(Math.random() * 12) === 0 ? Math.floor(Math.random() * 3) : 0];
             snowflake.style.left = Math.random() * 100 + 'vw';
             snowflake.style.animationDelay = (Math.random() * 5) + 's';
