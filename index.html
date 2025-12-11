@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Das große FF Birkach Weihnachtsfeierquiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <main id="quiz-container">
+        <h1 style="text-align:center; color:#ffd700; text-shadow:2px 2px 8px #b30000; margin-top:1em;">
+            🎄 Das FF Birkach Weihnachtsfeierquiz 🎁
+        </h1>
         <div id="quiz-board" class="board-grid"></div>
 
         <div id="question-modal" class="modal hidden">
             <div class="modal-content">
                 <h2 id="modal-category"></h2>
                 <p class="points-indicator" id="modal-points"></p>
-                
+
                 <div class="question-text">
                     <p id="modal-question"></p>
                     <ul id="modal-options"></ul>
@@ -23,10 +28,10 @@
 
                 <div class="answer-section">
                     <button id="show-answer-btn">Lösung anzeigen</button>
-                    
+
                     <p id="modal-answer" class="hidden final-answer-text"></p>
                 </div>
-                
+
                 <button id="close-modal-btn" class="action-button">Zurück zur Tafel</button>
             </div>
         </div>
@@ -37,9 +42,13 @@
         function createSnowflake() {
             const snowflake = document.createElement('span');
             snowflake.className = 'snowflake';
-            // Zufällig ❄️, 🎄 oder 🚒
+            // Zufällig ❄️, 🎄, 🚒, 🎁 oder 🍺
             const icons = ['❄️', '🎄', '🚒', '🎁', '🍺'];
-            snowflake.textContent = icons[Math.floor(Math.random() * 12) === 0 ? Math.floor(Math.random() * 3) : 0];
+            // 1 von 6 Flocken ist ein anderes Icon als ❄️
+            const idx = Math.floor(Math.random() * 6) === 0
+                ? Math.floor(Math.random() * (icons.length - 1)) + 1
+                : 0;
+            snowflake.textContent = icons[idx];
             snowflake.style.left = Math.random() * 100 + 'vw';
             snowflake.style.animationDelay = (Math.random() * 5) + 's';
             snowflake.style.fontSize = (Math.random() * 1.5 + 1) + 'em';
@@ -53,4 +62,5 @@
         setInterval(createSnowflake, 400);
     </script>
 </body>
+
 </html>
