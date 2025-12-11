@@ -4,11 +4,12 @@ const QUIZ_BOARD_EL = document.getElementById('quiz-board');
 const MODAL_EL = document.getElementById('question-modal');
 const CLOSE_MODAL_BTN = document.getElementById('close-modal-btn');
 const SHOW_ANSWER_BTN = document.getElementById('show-answer-btn');
+const START_TIMER_BTN = document.getElementById('start-timer-btn');
 const MODAL_ANSWER_EL = document.getElementById('modal-answer');
-
-let quizData = []; 
-let categories = []; 
 let currentQuestion = null; 
+let timerInterval = null;
+let timerActive = false;
+let blinkInterval = null;
 
 // Mapping für CSS-Farben der Kategorien
 const CATEGORY_COLORS = [
@@ -41,6 +42,7 @@ async function loadAndParseCSV() {
         return [];
     }
 }
+
 
 /**
  * Parst den CSV-Text in ein Array von Objekten.
@@ -142,20 +144,17 @@ function renderQuizBoard() {
  */
 function openQuestion(question) {
     currentQuestion = question;
-    
-    // Setzt die Texte im Modal
+
     document.getElementById('modal-category').textContent = question.Kategorie;
     document.getElementById('modal-points').textContent = `${question.Schwierigkeit} Punkte`;
     document.getElementById('modal-question').textContent = question.Frage;
-    MODAL_ANSWER_EL.textContent = question.Lösung; 
-    
+    MODAL_ANSWER_EL.textContent = question.Lösung;
+
     // Antwortmöglichkeiten rendern
     const optionsList = document.getElementById('modal-options');
     optionsList.innerHTML = '';
-    
     if (question.Antwortmöglichkeiten) {
         optionsList.style.display = 'block';
-        // Splittet die Antwortmöglichkeiten jetzt mit Pipe |
         const options = question.Antwortmöglichkeiten.split('|').filter(o => o.trim() !== '');
         options.forEach(option => {
             const li = document.createElement('li');
@@ -166,16 +165,59 @@ function openQuestion(question) {
         optionsList.style.display = 'none';
     }
 
-    // FIX: Antwort verstecken beim Öffnen der Frage
-    MODAL_ANSWER_EL.classList.add('hidden'); 
+    // Timer zurücksetzen
+    resetTimer();
+
+    // Antwort verstecken beim Öffnen der Frage
+    MODAL_ANSWER_EL.classList.add('hidden');
     SHOW_ANSWER_BTN.disabled = false;
-    
+
     MODAL_EL.classList.remove('hidden');
 }
 
-/**
- * Zeigt die Lösung im Modal an.
- */
+function startTimer() {
+    if (timerActive) return;
+    let timeLeft = 15;
+    timerActive = true;
+    START_TIMER_BTN.disabled = true;
+    START_TIMER_BTN.textContent = `⏱️ ${timeLeft} Sekunden`;
+    START_TIMER_BTN.classList.remove('timer-blink');
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        START_TIMER_BTN.textContent = `⏱️ ${timeLeft} Sekunden`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            timerActive = false;
+            START_TIMER_BTN.textContent = '⏱️ Zeit abgelaufen!';
+            START_TIMER_BTN.classList.add('timer-blink');
+            // Blinken starten
+            let blink = true;
+            blinkInterval = setInterval(() => {
+                if (blink) {
+                    START_TIMER_BTN.style.backgroundColor = 'red';
+                    START_TIMER_BTN.style.color = 'white';
+                } else {
+                    START_TIMER_BTN.style.backgroundColor = 'white';
+                    START_TIMER_BTN.style.color = 'red';
+                }
+                blink = !blink;
+            }, 400);
+        }
+    }, 1000);
+}
+
+function resetTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    if (blinkInterval) clearInterval(blinkInterval);
+    timerActive = false;
+    if (START_TIMER_BTN) {
+        START_TIMER_BTN.textContent = '⏱️ Timer starten';
+        START_TIMER_BTN.disabled = false;
+        START_TIMER_BTN.style.backgroundColor = '';
+        START_TIMER_BTN.style.color = '';
+        START_TIMER_BTN.classList.remove('timer-blink');
+    }
+}
 function showAnswer() {
     MODAL_ANSWER_EL.classList.remove('hidden'); 
     SHOW_ANSWER_BTN.disabled = true; 
@@ -186,19 +228,16 @@ function showAnswer() {
  */
 function closeQuestion() {
     if (currentQuestion) {
-        // Frage als gespielt markieren
         const playedQuestionIndex = quizData.findIndex(q => q.id === currentQuestion.id);
         if (playedQuestionIndex !== -1) {
             quizData[playedQuestionIndex].played = true;
         }
-
-        // Karte auf der Tafel ausgrauen
         const cardEl = document.getElementById(`card-${currentQuestion.id}`);
         if (cardEl) {
             cardEl.classList.add('played');
         }
     }
-
+    resetTimer();
     MODAL_EL.classList.add('hidden');
     currentQuestion = null;
 }
@@ -206,6 +245,7 @@ function closeQuestion() {
 // --- Event Listener ---
 SHOW_ANSWER_BTN.addEventListener('click', showAnswer);
 CLOSE_MODAL_BTN.addEventListener('click', closeQuestion);
+if (START_TIMER_BTN) START_TIMER_BTN.addEventListener('click', startTimer);
 
 // --- Initialisierung ---
 async function init() {
