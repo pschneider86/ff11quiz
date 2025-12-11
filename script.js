@@ -56,31 +56,18 @@ function parseCSV(csvText) {
     // const headers = lines[0].split(';'); 
     const data = [];
 
+
     for (let i = 1; i < lines.length; i++) {
         const values = lines[i].split(';').map(v => v.trim());
-        const N = values.length;
-
-        // Mindestens 4 Spalten (Kategorie, Schwierigkeit, Frage, Lösung)
-        if (N < 4) continue; 
+        // Neue Reihenfolge: Kategorie;Schwierigkeit;Frage;Lösung;Antwortmöglichkeiten
+        if (values.length < 5) continue;
 
         const question = {};
-        
-        // 1. Feste Spalten (Kategorie, Schwierigkeit, Frage)
         question.Kategorie = values[0];
         question.Schwierigkeit = values[1];
         question.Frage = values[2];
-        
-        // 2. Antwortmöglichkeiten (alles zwischen Frage und Lösung)
-        // Beginnt bei Index 3 (nach Frage) und endet vor der letzten Spalte (Lösung)
-        const optionsArray = values.slice(3, N - 1).filter(v => v !== '');
-        
-        // Optionen wieder mit Semikolon zusammenfügen, um sie später im Modal zu splitten
-        question.Antwortmöglichkeiten = optionsArray.join(';'); 
-        
-        // 3. Lösung (die letzte Spalte)
-        question.Lösung = values[N - 1];
-
-        // Hinzufügen einer eindeutigen ID und des "gespielt"-Status
+        question.Lösung = values[3];
+        question.Antwortmöglichkeiten = values[4];
         question.id = `${question.Kategorie}-${question.Schwierigkeit}`;
         question.played = false;
         data.push(question);
@@ -168,8 +155,8 @@ function openQuestion(question) {
     
     if (question.Antwortmöglichkeiten) {
         optionsList.style.display = 'block';
-        // Splittet die zusammengeführten Optionen wieder auf
-        const options = question.Antwortmöglichkeiten.split(';').filter(o => o.trim() !== '');
+        // Splittet die Antwortmöglichkeiten jetzt mit Pipe |
+        const options = question.Antwortmöglichkeiten.split('|').filter(o => o.trim() !== '');
         options.forEach(option => {
             const li = document.createElement('li');
             li.textContent = option.trim();
