@@ -253,6 +253,19 @@ async function init() {
     if (quizData.length > 0) {
         renderQuizBoard();
     }
+    // Zufallsbutton-Logik
+    const randomBtn = document.getElementById('random-question-btn');
+    if (randomBtn) {
+        randomBtn.addEventListener('click', () => {
+            const unplayed = quizData.filter(q => !q.played);
+            if (unplayed.length === 0) {
+                alert('Alle Fragen wurden bereits gespielt!');
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * unplayed.length);
+            openQuestion(unplayed[randomIndex]);
+        });
+    }
 }
 
 init();
