@@ -177,7 +177,7 @@ function openQuestion(question) {
 
 function startTimer() {
     if (timerActive) return;
-    let timeLeft = 15;
+    let timeLeft = 10;
     timerActive = true;
     START_TIMER_BTN.disabled = true;
     START_TIMER_BTN.textContent = `⏱️ ${timeLeft} Sekunden`;
